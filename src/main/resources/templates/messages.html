@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>All messages</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/messages}" th:object="${message}">
+<!--    <label for="text">Enter name: </label>-->
+<!--    <input type="text" th:field="*{text}" id="text"/>-->
+
+    <br/>
+    <label for="tag">Enter age: </label>
+    <input type="text" th:field="*{tag}" id="tag"/>
+
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+<h1>Message list</h1>
+
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>id</th>-->
+<!--        <th>text</th>-->
+<!--        <th>tag</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="message : ${messages}">-->
+<!--        <td th:text="${message.getId()}">ID</td>-->
+<!--        <td th:text="${message.getText()}">text</td>-->
+<!--        <td th:text="${message.getTag()}">tag</td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+</body>
+</html>
