@@ -1,4 +1,4 @@
-package ru.myrkwill.sweater.domain;
+package ru.myrkwill.sweater.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

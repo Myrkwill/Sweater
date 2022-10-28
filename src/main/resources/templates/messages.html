@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/messages}" th:object="${message}">
-<!--    <label for="text">Enter name: </label>-->
-<!--    <input type="text" th:field="*{text}" id="text"/>-->
+<form action="#" th:action="@{/messages}" th:object="${message}" method="post" modela>
+    <label for="text">Enter text: </label>
+    <input type="text" th:field="*{text}" id="text"/>
 
     <br/>
-    <label for="tag">Enter age: </label>
+    <label for="tag">Enter tag: </label>
     <input type="text" th:field="*{tag}" id="tag"/>
 
     <br/>
@@ -21,18 +21,18 @@
 
 <h1>Message list</h1>
 
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>id</th>-->
-<!--        <th>text</th>-->
-<!--        <th>tag</th>-->
-<!--    </tr>-->
-<!--    <tr th:each="message : ${messages}">-->
-<!--        <td th:text="${message.getId()}">ID</td>-->
-<!--        <td th:text="${message.getText()}">text</td>-->
-<!--        <td th:text="${message.getTag()}">tag</td>-->
-<!--    </tr>-->
-<!--</table>-->
+<table>
+    <tr>
+        <th>id</th>
+        <th>text</th>
+        <th>tag</th>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.getId()}">ID</td>
+        <td th:text="${message.getText()}">text</td>
+        <td th:text="${message.getTag()}">tag</td>
+    </tr>
+</table>
 
 </body>
 </html>
