@@ -19,14 +19,14 @@ public class MessagesController {
 	}
 
 	@GetMapping("/messages")
-	public String greeting(Model model) {
+	public String messages(Model model) {
 		model.addAttribute("message", new Message());
 		model.addAttribute("messages", messageRepository.findAll());
 		return "messages";
 	}
 
 	@PostMapping("/messages")
-	public String create( @ModelAttribute("message") Message message, BindingResult result, Model model) {
+	public String createMessage(@ModelAttribute("message") Message message, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "messages";
 		}
