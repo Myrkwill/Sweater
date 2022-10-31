@@ -30,12 +30,13 @@
     <tr>
         <th>id</th>
         <th>text</th>
-        <th>tag</th>
+        <th>author</th>
     </tr>
     <tr th:each="message : ${messages}">
         <td th:text="${message.getId()}">ID</td>
         <td th:text="${message.getText()}">text</td>
         <td th:text="${message.getTag()}">tag</td>
+        <td th:text="${message.getAuthorName()}">author</td>
     </tr>
 </table>
 
