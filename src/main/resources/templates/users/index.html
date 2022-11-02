@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sweater</title>
+</head>
+<body>
+
+<h1>User list</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Action</th>
+  </tr>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.getUsername()}">ID</td>
+    <td>
+      <ul th:each="role : ${user.getRoles()}">
+        <li th:text="${role}"></li>
+      </ul>
+    </td>
+    <td><a th:href="@{/users/{id}(id=${user.getId()})}" />Edit</td>
+  </tr>
+</table>
+
+</body>
+</html>
