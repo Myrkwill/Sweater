@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>All messages</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
@@ -11,13 +12,17 @@
     <input type="submit" value="Sign Out"/>
 </form>
 
-<form action="#" th:action="@{/messages}" th:object="${message}" method="post" modela>
+<form method="POST" th:action="@{/messages}" enctype="multipart/form-data">
     <label for="text">Enter text: </label>
-    <input type="text" th:field="*{text}" id="text"/>
+    <input type="text" name="text" id="text"/>
 
     <br/>
     <label for="tag">Enter tag: </label>
-    <input type="text" th:field="*{tag}" id="tag"/>
+    <input type="text" name="tag" id="tag"/>
+
+    <br/>
+    <label for="file">Enter tag: </label>
+    <input type="file" name="file" id="file"/>
 
     <br/>
 
@@ -30,13 +35,21 @@
     <tr>
         <th>id</th>
         <th>text</th>
+        <th>tag</th>
         <th>author</th>
+        <th>image</th>
     </tr>
     <tr th:each="message : ${messages}">
         <td th:text="${message.getId()}">ID</td>
         <td th:text="${message.getText()}">text</td>
         <td th:text="${message.getTag()}">tag</td>
         <td th:text="${message.getAuthorName()}">author</td>
+
+        <td>
+            <div th:if="${message.filename != null}">
+                <img th:src="@{'/img/' + ${message.filename}}" th:alt-title="#{logo}"/>
+            </div>
+        </td>
     </tr>
 </table>
 

@@ -1,44 +1,63 @@
 package ru.myrkwill.sweater.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.myrkwill.sweater.entities.Message;
 import ru.myrkwill.sweater.entities.User;
 import ru.myrkwill.sweater.repositories.MessageRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 @Controller
 public class MessagesController {
 
+	@Autowired
 	private MessageRepository messageRepository;
 
-	@Autowired
-	public MessagesController(MessageRepository messageRepository) {
-		this.messageRepository = messageRepository;
-	}
+	@Value("${upload.path}")
+	private String uploadPath;
+
 
 	@GetMapping("/messages")
 	public String messages(Model model) {
-		model.addAttribute("message", new Message());
 		model.addAttribute("messages", messageRepository.findAll());
 		return "messages";
 	}
 
 	@PostMapping("/messages")
 	public String createMessage(@AuthenticationPrincipal User user,
-								@ModelAttribute("message") Message message,
-								BindingResult result,
-								Model model) {
-		if (result.hasErrors()) {
-			return "messages";
+								@RequestParam String text,
+								@RequestParam String tag,
+								@RequestParam MultipartFile file,
+								Model model) throws IOException {
+
+		Message message = new Message(text, tag, user);
+
+
+		if (file != null && !file.getOriginalFilename().isEmpty()) {
+			File directory = new File(uploadPath);
+
+			if (!directory.exists()) {
+				directory.mkdir();
+			}
+
+			String uuidFilename = UUID.randomUUID().toString();
+			String filename = uuidFilename + "." + file.getOriginalFilename();
+
+			file.transferTo(new File(uploadPath + "/" + filename));
+
+			message.setFilename(filename);
 		}
 
-		Message newMessage = new Message(message.getText(), message.getTag(), user);
-		messageRepository.save(newMessage);
-		model.addAttribute("message", new Message());
+		messageRepository.save(message);
 		model.addAttribute("messages", messageRepository.findAll());
 
 		return "messages";
