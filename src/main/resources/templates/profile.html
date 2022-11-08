@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Sweater</title>
+</head>
+<body>
+
+
+Profile
+<form th:action="@{/users/profile}" method="post">
+  <div><label th:text="${username}"> </label></div>
+  <div><label> Email: <input type="email" name="email" th:text="${email}" placeholder="some@some.com"/> </label></div>
+  <div><label> Password: <input type="password" name="password"/> </label></div>
+  <div><input type="submit" value="Save"/></div>
+</form>
+
+</body>
+</html>
