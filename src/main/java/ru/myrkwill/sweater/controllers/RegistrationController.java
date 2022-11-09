@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.myrkwill.sweater.entities.User;
-import ru.myrkwill.sweater.repositories.UserRepository;
 import ru.myrkwill.sweater.services.UserService;
 
 /**
